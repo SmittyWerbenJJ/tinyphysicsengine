@@ -4,6 +4,8 @@
 
 This is tinyphysicsengine (TPE), a small, completely public domain KISS/suckless, fixed point physically inaccurate pure C header only 3D physics engine (or rather a library) mostly for entertainment purposes that's supposed to run even on tiny computers such as embedded, even **bare metal**. It's written in the same style/philosophy as [small3dlib](https://codeberg.org/drummyfish/small3dlib), [raycastlib](https://codeberg.org/drummyfish/raycastlib) etc.
 
+Keep in mind the library is not version 1.0 yet, but it's already completely usable. Basically just more polishing and testing should be done.
+
 TPE is NOT a "robust framework" and it is **NOT physically accurate**; basic things follow physics equations but a lot of other things are empirical approximations, the main goal is to achieve SIMPLE behavior that LOOKS LIKE real world physics. TPE can be used to **fake** many things (even such as e.g. car physics) just as in computer graphics we fake things such as reflections because in games we simply don't really notice they're inaccurate. This approach has been chosen on purpose after trying and failing to create a traditional physically accurate engine which is archived in the *old* folder; I already had physically correct collision detections and responses of rigid bodies programmed but eventually failed on dealing with the complexity of handling imprecisions of fixed point in very low/high energy cases. At that point I started over with a completely new approach: just use soft bodies made of spheres connected with springs and fake what is possible to fake.
 
 **The basic principles in short**: TPE uses soft body physics, bodies are modelled as **spheres connected by springs** but the springs can be made stiff so that the bodies behave almost like rigid bodies, so you can simulate (*fake*) both soft and rigid physics. Environment in which bodies are placed is modelled by **distance functions**, i.e. you can in theory create any environment as long as you can create a function that for any point in space returns the closest point to the environment (functions for basic and some more complex shapes are included in TPE).
@@ -32,6 +34,7 @@ TPE is NOT a "robust framework" and it is **NOT physically accurate**; basic thi
   - axis-aligned **triangular prism** (ramp)
   - **simple bounding sphere/box acceleration**
 - functions for **rotations**, mostly in Euler angles (no quaternions)
+- **deterministic behavior**
 - **ray casting** support (both against bodies and environments)
 - **simple deactivation of bodies** that don't move much for a while
 - **debug render**, a function that renders the 3D view of the world with a provided pixel drawing function (independent of any rendering system)
